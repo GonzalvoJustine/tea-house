@@ -1,6 +1,8 @@
-// Initialiser les states
+// Initialization the states
 
 const initialState = {
+  isClickOn : false,
+  vente: true,
   products: [
     {
       name: 'Brownie fondant aux noix',
@@ -47,8 +49,49 @@ const initialState = {
   ]
 };
 
-// Comportement du state
+// Comportment this state
 
-export default  function(state = initialState, /*action = {}*/) {
-  return state;
+export default function(state = initialState, action = {}) {
+
+  // Identifier l'élément que l'on souhaite
+  const targetProduct = state.products[action.index];
+  const vente = state.vente;
+
+  switch(action.type) {
+    case 'ADD':
+      targetProduct.quantity = targetProduct.quantity + 1;
+      targetProduct.sumPrice = targetProduct.sumPrice + targetProduct.price;
+      return {
+        ...state,
+      };
+
+    case 'SUBSTRACT':
+      if (targetProduct.quantity > 0) {
+        targetProduct.quantity = targetProduct.quantity - 1;
+      } else {
+        targetProduct.quantity = 0;
+      }
+      if (targetProduct.quantity > 0) {
+        targetProduct.sumPrice = targetProduct.sumPrice - targetProduct.price;
+      } else {
+        targetProduct.sumPrice = 0;
+      }
+      return {
+        ...state,
+      };
+
+    case 'ADD_LINK':
+      if (vente === true) {
+        return 'vente';
+      }
+      return {
+        ...state,
+      };
+
+    case 'RESET':
+      return state;
+
+    default:
+      return state;
+  }
 }

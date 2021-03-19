@@ -18,6 +18,79 @@ h1, nav a {
   }
 }
 
+button {
+  background: $main-color;
+  color: white;
+  border-color: $hover-color;
+  &:hover {
+    background: $hover-color;
+    text-decoration: none;
+    color: white;
+  }
+}
+
+.btn-cmd {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  transition: 0.3s ease-in-out;
+  background: $main-color;
+  position: relative;
+  height: 50px;
+  line-height: 50px;
+  margin-right: 30px;
+  padding: 0 20px;
+  text-decoration: none;
+  color: white;
+  border: none;
+
+  &::before {
+    transition: 0.3s ease-in-out;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -25px;
+    border-left: 25px solid transparent;
+    border-top: 25px solid $main-color;
+    border-bottom: 25px solid $main-color;
+  }
+
+  &:first-child::before {
+    display: none;
+  }
+
+  &::after {
+    transition: 0.3s ease-in-out;
+    position: absolute;
+    top: 0;
+    right: -25px;
+    border-left: 25px solid $main-color;
+    border-top: 25px solid transparent;
+    border-bottom: 25px solid transparent;
+    content: "";
+  }
+
+  &:hover {
+    background: $hover-color;
+    text-decoration: none;
+    color: white;
+  }
+
+  &:hover::before {
+    border-top-color: $hover-color;
+    border-bottom-color: $hover-color;
+  }
+
+  &:hover::after {
+    border-left-color: $hover-color;
+  }
+
+  &:first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+}
+
 // Breadcrumb
 //----------------------------------------------------------------------------------------------------------------------
 .steps {
